@@ -1,4 +1,5 @@
 # Docker Compose Init
+HOLA
 El siguiente ejemplo es un cliente-servidor el cual corre en containers
 con la ayuda de [docker-compose](https://docs.docker.com/compose/). El presente
 repositorio es un ejemplo práctico brindado por la cátedra para que los alumnos
@@ -121,6 +122,5 @@ Modificar el servidor actual para que el mismo permita procesar mensajes y acept
 conexiones en paralelo.
 
 El alumno puede elegir el lenguaje en el cual desarrollar el nuevo código del servidor. Si el
-alumno desea realizar las modificaciones en Python, 
+alumno desea realizar las modificaciones en Python,
 [tener en cuenta las limitaciones del lenguaje](https://wiki.python.org/moin/GlobalInterpreterLock).
-
