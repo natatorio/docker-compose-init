@@ -4,6 +4,7 @@ import (
 	"log"
 	"time"
 
+
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 
@@ -33,6 +34,21 @@ func InitConfig() (*viper.Viper, error) {
 
 	if _, err := time.ParseDuration(v.GetString("loop_period")); err != nil {
 		return nil, errors.Wrapf(err, "Could not parse CLI_LOOP_PERIOD env var as time.Duration.")
+	}
+
+	v2 := viper.New()
+	v2.SetConfigName("conf")
+	v2.SetConfigType("json")
+	v2.AddConfigPath("/conf/")
+	err := v2.ReadInConfig()
+	if err != nil {
+		return nil, errors.Wrapf(err, "Could not read config file from volume")
+	}
+	if v.GetString("server_address") != v2.GetString("CLI_SERVER_ADDRESS") ||
+	v.GetString("id") != v2.GetString("CLI_ID") ||
+	v.GetString("loop_lapse") != v2.GetString("CLI_LOOP_LAPSE") ||
+	v.GetString("loop_period") != v2.GetString("CLI_LOOP_PERIOD") {
+		return nil, errors.Wrapf(err, "Bad read of config file from volume")
 	}
 
 	return v, nil

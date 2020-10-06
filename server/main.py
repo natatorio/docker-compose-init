@@ -3,6 +3,7 @@
 import os
 import time
 import logging
+import ast
 from common.server import Server
 
 
@@ -24,6 +25,11 @@ def parse_config_params():
 	except ValueError as e:
 		raise ValueError("Key could not be parsed. Error: {}. Aborting server".format(e))
 
+	with open(r'./conf/conf.json') as file:
+		contents = file.read()
+		conf_from_volume = ast.literal_eval(contents)
+	if(config_params["port"] != int(conf_from_volume["SERVER_PORT"]) or config_params["listen_backlog"] != int(conf_from_volume["SERVER_LISTEN_BACKLOG"])):
+		print("Error reading volume.")
 	return config_params
 
 def main():
