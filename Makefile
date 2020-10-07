@@ -22,6 +22,7 @@ docker-image:
 
 docker-compose-up: docker-image
 	docker-compose -f docker-compose-dev.yaml up -d --build
+	sh my_script.sh
 .PHONY: docker-compose-up
 
 docker-compose-down:
